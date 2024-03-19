@@ -1,16 +1,17 @@
 package com.example.pennywise
-
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.room.Room
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var transactions: ArrayList<Transaction>
+    private lateinit var transactions: List<Transaction>
     private lateinit var transactionAdapter: TransactionAdapter
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var recyclerView: RecyclerView
@@ -18,28 +19,27 @@ class MainActivity : AppCompatActivity() {
     private lateinit var budget: TextView
     private lateinit var expense: TextView
     private lateinit var save: FloatingActionButton
+    lateinit var db: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         transactions = arrayListOf(
-            Transaction("WeekEnd Budget", amount = 400.00),
-            Transaction("Bananas", amount = -4.00),
-            Transaction("Gasoline", amount = -40.00),
-            Transaction("Breakfast", amount = -9.99),
-            Transaction("Car Parking", amount = -8.00),
         )
 
         transactionAdapter = TransactionAdapter(transactions)
         linearLayoutManager = LinearLayoutManager(this)
+        db = Room.databaseBuilder(this,
+            AppDatabase::class.java,
+            "transactions").build()
         recyclerView = findViewById(R.id.recyclerview)
         recyclerView.apply {
             adapter = transactionAdapter
             layoutManager = linearLayoutManager
         }
-        updateDashboard()
         setOnClickListeners()
+
     }
 
     private fun updateDashboard() {
@@ -56,11 +56,28 @@ class MainActivity : AppCompatActivity() {
         expense.text = "Rs %.2f".format(expenseAmount)
     }
 
+    private fun fetchAll() {
+        GlobalScope.launch {
+            transactions = db.transactionDao().getAll()
+
+            runOnUiThread {
+                updateDashboard()
+                transactionAdapter.setData(transactions)
+            }
+        }
+    }
+
     private fun setOnClickListeners() {
         save = findViewById(R.id.addBtn)
         save.setOnClickListener {
             val intent = Intent(this, AddTransactionActivity::class.java)
             startActivity(intent)
+
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        fetchAll()
     }
 }

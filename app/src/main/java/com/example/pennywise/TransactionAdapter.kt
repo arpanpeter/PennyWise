@@ -9,7 +9,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 
-class TransactionAdapter(private val transactions:ArrayList<Transaction>):RecyclerView.Adapter<TransactionAdapter.TransactionHolder>() {
+class TransactionAdapter(private var transactions:List<Transaction>):RecyclerView.Adapter<TransactionAdapter.TransactionHolder>() {
     class TransactionHolder(view:View):RecyclerView.ViewHolder(view){
         val label:TextView=view.findViewById(R.id.label)
         val amount:TextView=view.findViewById(R.id.amount)
@@ -25,6 +25,7 @@ class TransactionAdapter(private val transactions:ArrayList<Transaction>):Recycl
         return  transactions.size
     }
 
+
     override fun onBindViewHolder(holder: TransactionHolder, position: Int) {
         val transaction:Transaction=transactions[position]
         val context:Context=holder.amount.context
@@ -37,5 +38,9 @@ class TransactionAdapter(private val transactions:ArrayList<Transaction>):Recycl
             holder.amount.setTextColor(ContextCompat.getColor(context,R.color.red))
         }
         holder.label.text=transaction.label
+    }
+    fun setData(transactions: List<Transaction>){
+        this.transactions = transactions
+        notifyDataSetChanged()
     }
 }

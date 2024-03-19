@@ -6,7 +6,10 @@ import android.widget.Button
 import android.widget.ImageButton
 import android.widget.TextView
 import androidx.core.widget.addTextChangedListener
+import androidx.room.Room
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class AddTransactionActivity : AppCompatActivity() {
     private lateinit var amountLayout: TextInputLayout
@@ -46,10 +49,10 @@ class AddTransactionActivity : AppCompatActivity() {
                 labelLayout.error = "Please enter a valid label"
             else if (amount == null)
                 amountLayout.error = "Please enter a valid amount"
-            // else {
-            //     val transaction = Transaction(0, label, amount, description)
-            //     insert(transaction)
-            // }
+             else {
+                 val transaction = Transaction(0, label, amount, description)
+                 insert(transaction)
+             }
         }
 
 
@@ -58,14 +61,14 @@ class AddTransactionActivity : AppCompatActivity() {
         }
     }
 
-    // private fun insert(transaction: Transaction){
-    //     val db = Room.databaseBuilder(this,
-    //         AppDatabase::class.java,
-    //         "transactions").build()
-    //
-    //     GlobalScope.launch {
-    //         db.transactionDao().insertAll(transaction)
-    //         finish()
-    //     }
-    // }
+     private fun insert(transaction: Transaction){
+         val db = Room.databaseBuilder(this,
+             AppDatabase::class.java,
+             "transactions").build()
+
+         GlobalScope.launch {
+             db.transactionDao().insertAll(transaction)
+             finish()
+         }
+     }
 }
