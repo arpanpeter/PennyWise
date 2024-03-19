@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PennyWise</string>
+    <string name="total_balance">Total Balance</string>
+    <string name="transactions">Transactions</string>
+</resources>
