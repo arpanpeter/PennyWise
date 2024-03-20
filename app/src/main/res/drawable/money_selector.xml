@@ -3,5 +3,6 @@
     <item android:state_focused="true"
         android:drawable="@drawable/baseline_currency_rupee_green"/>
     <item android:state_focused="false"
+
         android:drawable="@drawable/baseline_currency_rup4"/>
 </selector>
