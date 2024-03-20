@@ -14,7 +14,8 @@ import kotlinx.coroutines.launch
 class AddTransactionActivity : AppCompatActivity() {
     private lateinit var amountLayout: TextInputLayout
     private lateinit var labelLayout: TextInputLayout
-    private lateinit var closeBtn:ImageButton
+    private lateinit var closeBtn: ImageButton
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -22,7 +23,7 @@ class AddTransactionActivity : AppCompatActivity() {
 
         amountLayout = findViewById(R.id.amountLayout)
         labelLayout = findViewById(R.id.labelLayout)
-        closeBtn=findViewById(R.id.closeBtn)
+        closeBtn = findViewById(R.id.closeBtn)
 
         val amountInput = findViewById<TextView>(R.id.amountInput)
         val labelInput = findViewById<TextView>(R.id.labelInput)
@@ -38,8 +39,8 @@ class AddTransactionActivity : AppCompatActivity() {
             if (it!!.count() > 0)
                 amountLayout.error = null
         }
+         val addTransactionBtn = findViewById<Button>(R.id.addTransactionBtn)
 
-        val addTransactionBtn = findViewById<Button>(R.id.addTransactionBtn)
         addTransactionBtn.setOnClickListener {
             val label = labelInput.text.toString()
             val description = descriptionInput.text.toString()
@@ -49,10 +50,10 @@ class AddTransactionActivity : AppCompatActivity() {
                 labelLayout.error = "Please enter a valid label"
             else if (amount == null)
                 amountLayout.error = "Please enter a valid amount"
-             else {
-                 val transaction = Transaction(0, label, amount, description)
-                 insert(transaction)
-             }
+            else {
+                val transaction = Transaction(0, label, amount, description)
+                insert(transaction)
+            }
         }
 
 
@@ -61,14 +62,16 @@ class AddTransactionActivity : AppCompatActivity() {
         }
     }
 
-     private fun insert(transaction: Transaction){
-         val db = Room.databaseBuilder(this,
-             AppDatabase::class.java,
-             "transactions").build()
+    private fun insert(transaction: Transaction) {
+        val db = Room.databaseBuilder(
+            this,
+            AppDatabase::class.java,
+            "transactions"
+        ).build()
 
-         GlobalScope.launch {
-             db.transactionDao().insertAll(transaction)
-             finish()
-         }
-     }
+        GlobalScope.launch {
+            db.transactionDao().insertAll(transaction)
+            finish()
+        }
+    }
 }

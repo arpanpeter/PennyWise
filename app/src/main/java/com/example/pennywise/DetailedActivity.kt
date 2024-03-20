@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
 import androidx.room.Room
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -27,6 +28,7 @@ class DetailedActivity : AppCompatActivity() {
         amountLayout = findViewById(R.id.amountLayout)
         labelLayout = findViewById(R.id.labelLayout)
         closeBtn = findViewById(R.id.closeBtn)
+
         val amountInput = findViewById<TextView>(R.id.amountInput)
         val labelInput = findViewById<TextView>(R.id.labelInput)
         val descriptionInput = findViewById<TextView>(R.id.descriptionInput)

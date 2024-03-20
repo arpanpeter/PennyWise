@@ -7,6 +7,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailedActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        android:src="@mipmap/ic_launcher_round"
+        app:layout_constraintBottom_toTopOf="@+id/labelInput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.539"
+        tools:ignore="MissingConstraints">
+
+    </ImageView>
+
     <ImageButton
         android:id="@+id/closeBtn"
         android:layout_width="34dp"
@@ -87,6 +104,7 @@
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/description_selector"
                 android:drawablePadding="12dp"
+
                 android:inputType="text|textMultiLine"
                 android:textSize="34sp" />
         </com.google.android.material.textfield.TextInputLayout>
