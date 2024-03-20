@@ -36,13 +36,17 @@ class DetailedActivity : AppCompatActivity() {
         descriptionInput.text = transaction.description
 
         labelInput.addTextChangedListener {
-            if (it!!.count() > 0)
-                labelLayout.error = null
+            if (it != null) {
+                if (it.count() > 0)
+                    labelLayout.error = null
+            }
         }
 
         amountInput.addTextChangedListener {
-            if (it!!.count() > 0)
-                amountLayout.error = null
+            if (it != null) {
+                if (it.isNotEmpty())
+                    amountLayout.error = null
+            }
         }
 
         val updateButton = findViewById<Button>(R.id.updateBtn)

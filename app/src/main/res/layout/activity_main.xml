@@ -33,7 +33,7 @@
                 android:id="@+id/balance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="$300"
+                android:text="300"
                 android:textColor="@color/black"
                 android:textSize="32sp"
                 android:textStyle="bold"/>
@@ -79,7 +79,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:autoSizeTextType="uniform"
-                        android:text="$700"
+                        android:text="700"
                         android:textStyle="bold"
                         android:textSize="25sp"
                         android:textColor="#4CAF50"/>
@@ -105,7 +105,7 @@
                         android:autoSizeMaxTextSize="100sp"
                         android:autoSizeStepGranularity="2sp"
                         android:layout_height="wrap_content"
-                        android:text="$400"
+                        android:text="400"
                         android:textStyle="bold"
                         android:textSize="25sp"
                         android:textColor="#E42B2B"/>
