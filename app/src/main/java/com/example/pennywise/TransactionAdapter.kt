@@ -1,6 +1,7 @@
 package com.example.pennywise
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,11 @@ class TransactionAdapter(private var transactions:List<Transaction>):RecyclerVie
             holder.amount.setTextColor(ContextCompat.getColor(context,R.color.red))
         }
         holder.label.text=transaction.label
+        holder.itemView.setOnClickListener {
+            val intent=Intent(context,DetailedActivity::class.java)
+            intent.putExtra("transaction",transaction)
+            context.startActivity(intent)
+        }
     }
     fun setData(transactions: List<Transaction>){
         this.transactions = transactions
