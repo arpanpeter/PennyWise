@@ -42,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawablePadding="12dp"
+                android:drawableStart="@drawable/label_selector"
                 android:inputType="text"
                 android:maxLines="1"
                 android:textSize="34sp" />
@@ -84,6 +85,7 @@
                 android:id="@+id/descriptionInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/description_selector"
                 android:drawablePadding="12dp"
                 android:inputType="text|textMultiLine"
                 android:textSize="34sp" />
